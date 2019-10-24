@@ -1,0 +1,743 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Closing an Open Port (Tips.Net)</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="Windows, Web and Online, MS Windows, Microsoft Windows, Microsoft" />
+    <meta name="description" content="On a routine security check, you may discover that a particular port is open that shouldn't be. This tip tells you how to close an open port. (Tips.Net)" />
+    <meta name="author" content="Barry Dysert" />
+    <meta name="Rating" content="General" />
+    <meta name="Copyright" content="Sharon Parq Associates, Inc." />
+	<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+    <link href="https://css.tips.net/newsite2-base.css" rel="stylesheet" />
+    <link href="https://css.tips.net/newsite2-tech.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://js.tips.net/newsite.js"></script>
+    <script type="text/javascript">
+var sheight=130;
+var sspeed=2;
+var msg='';
+     msg += '<p><a href="https://windows.tips.net/T013690_Start_Menu_Folders.html" target="_blank">Start Menu Folders</a></p>'+
+'<p><a href="https://windows.tips.net/T003602_Changing_How_User_Account_Control_Works.html" target="_blank">Changing How User Account Control Works</a></p>'+
+'<p><a href="https://windows.tips.net/T003397_Feeling_All_Powerful.html" target="_blank">Feeling All Powerful?</a></p>'+
+'<p><a href="https://windows.tips.net/T013687_Defining_Words_Quickly.html" target="_blank">Defining Words Quickly</a></p>'+
+'<p><a href="https://windows.tips.net/T003601_Understanding_User_Account_Control.html" target="_blank">Understanding User Account Control</a></p>'+
+'<p><a href="https://windows.tips.net/T000198_Scanning_and_Fixing_System_Files.html" target="_blank">Scanning and Fixing System Files</a></p>'+
+'<p><a href="https://windows.tips.net/T007008_Assigning_a_Picture_to_a_Folder.html" target="_blank">Assigning a Picture to a Folder</a></p>'+
+'<p><a href="https://windows.tips.net/T005836_Adding_Items_to_the_New_Context_Menu.html" target="_blank">Adding Items to the "New" Context Menu</a></p>'+
+'';
+
+var resumesspeed=sspeed;
+function startSlider() {
+    if (document.all) iemarquee(ticker);
+    else if (document.getElementById)
+        ns6marquee(document.getElementById('ticker'));
+}
+
+function iemarquee(whichdiv){
+    iediv=eval(whichdiv)
+    sheight += 50;
+    iediv.style.pixelTop=sheight
+    iediv.innerHTML=msg
+    sizeup=iediv.offsetHeight
+    ieslide()
+}
+
+function ieslide(){
+    if (iediv.style.pixelTop>=sizeup*(-1)){
+        iediv.style.pixelTop-=sspeed
+        setTimeout("ieslide()",100)
+    }
+    else{
+        iediv.style.pixelTop=sheight
+        ieslide()
+    }
+}
+
+function ns6marquee(whichdiv){
+    ns6div=eval(whichdiv)
+//    sheight += 50;
+    ns6div.style.top=sheight + "px";
+    ns6div.innerHTML=msg
+    sizeup=ns6div.offsetHeight
+    ns6slide()
+}
+
+function ns6slide(){
+    if (parseInt(ns6div.style.top)>=sizeup*(-1)){
+        theTop = parseInt(ns6div.style.top)-sspeed
+        ns6div.style.top = theTop + "px";
+        setTimeout("ns6slide()",100)
+    }
+    else {
+        ns6div.style.top = sheight + "px";
+        ns6slide()
+    }
+}
+    </script>
+    <script type="text/javascript">var type="none", num=13105, site=15;</script>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(["_setAccount", "UA-2602834-32"]);
+            _gaq.push(["_trackPageview"]);
+            (function() {
+                var ga = document.createElement("script"); ga.type = "text/javascript"; ga.async = true;
+                ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+                var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+</head>
+<body>
+	<!-- Header -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<div class="col-md-3 col-sm-3 col-xs-2">
+					<a href="/" class="logo-link"><img id="tips-logo" src="https://images.tips.net/commonImages/logo.png" alt="tips.net"></a>
+
+					<!-- Breadcrumbs -->
+					<div class="breadcrumb-section hidden-sm hidden-xs">
+						<ul class="breadcrumbs">
+                                <li><a href="https://www.tips.net" class="active-breadcrumb">Tips.Net</a></li>
+                                <li>&nbsp;>&nbsp;<a href="https://windows.tips.net" class="active-breadcrumb">WindowsTips</a></li>
+                                <li>&nbsp;>&nbsp;<a href="https://windows.tips.net/C0257_Web_and_Online.html" class="active-breadcrumb">Web and Online</a></li>
+
+						</ul>
+					</div>
+				</div>
+
+                <div class="col-md-3 col-sm-3 col-xs-2"></div>
+					<!-- Navbar -->
+					<div class="navbar-header">
+						<button class="navbar-toggle" type="button" onclick="viewSearch();">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="glyphicon glyphicon-search search-icon-mobile" aria-hidden="true"></span>
+						</button>
+					</div>
+					<div id="bs-navbar-collapse" class="collapse navbar-collapse" role="navigation">
+						<div class="col-md-6 col-sm-6 col-xs-8">
+							<!-- This search bar is only hidden on mobile -->
+							<div class="form-navbar hidden-xs">
+								<form class="form-inline navbar-right" role="search" method="get" id="searchbox" action="/results.html">
+									<div class="form-group">
+										<div class="input-group">
+                                    		<input type="text" class="form-control" placeholder="Search WindowsTips" name="q" />
+											<div class="input-group-addon">
+												<button type="submit" class="btn btn-primary" id="searchsubmit" onclick="return chkSearch();">
+													<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+
+							</div>
+							<!-- This is a duplicate search bar with different styling that is only visible on mobile -->
+							<div class="form-navbar-collapsed visible-xs">
+								<form class="form-inline navbar-right" role="search" method="get" id="searchbox" action="/results.html">
+									<div class="form-group">
+										<div class="input-group">
+                            	       		<input type="text" class="form-control" placeholder="Search WindowsTips" name="q" />
+											<div class="input-group-addon">
+												<button type="submit" class="btn btn-primary" onclick="chkSearch();">
+													<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+
+							</div>
+						</div>
+					</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Body -->
+    <div class="offset-top-nav"></div>
+    <div class="container">
+        <div class="row">
+
+            <!-- Main Content Section -->
+            <div class="center-column col-md-9 col-sm-9 col-xs-12">
+                <!-- Article Heading Info Section -->
+                <!-- google_ad_section_start -->
+                <div class="row article-heading-info">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+
+                        <div class="article-heading">
+                            <h1>Closing an Open Port</h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 col-sm-2 col-xs-2">
+                                <div class="author-picture">
+                                    <img class="img-responsive" src="https://images.tips.net/commonImages/authors/smPic0037_1326855697.jpg">
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-sm-7 col-xs-7">
+                                <p>by <a href="https://www.tips.net/Authors/A0037_Barry_Dysert.html">Barry Dysert</a>                                <br />(last updated September 17, 2018)                                </p>                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-3">
+                               <p><a href="https://windows.tips.net/T013105_Closing_an_Open_Port.html#comment-form-hd" class="comment-link2"><span id="comment-link2">2</span></a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Content Block Section -->
+                <div class="ad-content-box visible-lg visible-md">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Windows AU1 -->
+                    <ins class="adsbygoogle"
+                        style="display:inline-block;width:300px;height:250px"
+                        data-ad-client="ca-pub-7517418523515440"
+                        data-ad-slot="2961593011"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                <div class="content-block-1">
+<p>In the tip titled <a href="https://windows.tips.net/T009986_Scanning_Your_System_for_Open_Ports.html"><em>Scanning Your System for Open Ports</em></a> you discover how to see what ports are open on your computer. If you want to close an open port, you can do so by using the Windows Firewall (Windows Defender Firewall for Windows 10). For example, let's say you want to close port 5500 for all inbound connections. Perform the steps outlined below.</p>
+<ol>
+<li>Open Windows Firewall by going to Start | Control Panel | Windows Firewall. If you are using Windows 10, type "Windows Defender Firewall" (without the quotes) in the Search box. (See Figure 1.) </li>
+<p class="fig"><img class="img-responsive" src="https://images.tips.net/S15/Figs/T13105F1.png" border="0" /></p>
+<p class="figcap"><strong> Figure 1.</strong> Windows Defender Firewall opening screen.</p>
+
+<li>On the left, click the "Advanced Settings" link. (See Figure 2.) </li>
+<p class="fig"><img class="img-responsive" src="https://images.tips.net/S15/Figs/T13105F2.png" border="0" /></p>
+<p class="figcap"><strong> Figure 2.</strong> Windows Defender Firewall advanced settings.</p>
+
+<li>On the left, click the "Inbound Rules" link. Windows displays a list of all the firewall's inbound rules.</li>
+<li>Right-click the "Inbound Rules" link, and from the resulting Context menu select "New Rule." Windows displays the first step of the New Inbound Rule Wizard. (See Figure 3.) </li>
+<p class="fig"><img class="img-responsive" src="https://images.tips.net/S15/Figs/T13105F3.png" border="0" /></p>
+<p class="figcap"><strong> Figure 3.</strong> Step 1 of the New Inbound Rule Wizard.</p>
+
+<li>Since you want to close a particular port, click the Port radio button and click <strong>Next</strong>. The wizard allows you to specify which port you want to affect. (See Figure 4.) </li>
+<p class="fig"><img class="img-responsive" src="https://images.tips.net/S15/Figs/T13105F4.png" border="0" /></p>
+<p class="figcap"><strong> Figure 4.</strong> Step 2 of the New Inbound Rule Wizard.</p>
+
+<li>You want the rule to apply to TCP, so click that radio button and also type "5500" (without quote marks) into the text box. Then click <strong>Next</strong> to move to the next wizard step. (See Figure 5.) </li>
+<p class="fig"><img class="img-responsive" src="https://images.tips.net/S15/Figs/T13105F5.png" border="0" /></p>
+<p class="figcap"><strong> Figure 5.</strong> Step 3 of the New Inbound Rule Wizard.</p>
+
+<li>Click the Block the Connection radio button and click <strong>Next</strong> to display the next wizard step. (See Figure 6.) </li>
+<p class="fig"><img class="img-responsive" src="https://images.tips.net/S15/Figs/T13105F6.png" border="0" /></p>
+<p class="figcap"><strong> Figure 6.</strong> Step 4 of the New Inbound Rule Wizard.</p>
+
+<li>Ensure that all three checkboxes are marked and again click <strong>Next</strong> to move on. (See Figure 7.) </li>
+<p class="fig"><img class="img-responsive" src="https://images.tips.net/S15/Figs/T13105F7.png" border="0" /></p>
+<p class="figcap"><strong> Figure 7.</strong> Step 5 of the New Inbound Rule Wizard.</p>
+
+<li>Type in a name for the rule and optionally type a description, then click <strong>Finish</strong>.</li>
+</ol>
+<p>Port 5500 is now closed and cannot be used by any service.</p>
+
+
+                </div>
+				<div class="content-block-2">
+					<div class="home-page-content">
+						<p><a href="https://windows.tips.net/T013105_Closing_an_Open_Port.html#comment-form-hd"><span id="comment-link" style="font-weight: bold; font-size: 14px"></span></a></p>
+
+					</div>
+				</div>
+
+                <div id="top-leader" class="ad-horizontal  hidden-sm hidden-xs">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Windows RU1 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-7517418523515440"
+                         data-ad-slot="9968389410"
+                         data-ad-format="auto"></ins>
+                    <script>
+                    	(adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                <div class="content-block-3">
+                    <p><img src="https://images.tips.net/S15/images/btn7.png" width="15" height="15" /><img src="https://images.tips.net/S15/images/btn10.png" width="15" height="15" />&nbsp;This tip (13105) applies to Windows 7 and 10.</p>
+                </div>
+                <!-- google_ad_section_end -->
+                <!-- Author Section -->
+                <div class="author-bio content-block-2">
+                    <div class="red-heading-container">
+                        <h5>Author Bio</h5>
+                    </div>
+                    <p class="author-red">Barry Dysert</p>
+                    <p>Barry has been a computer professional for over 35 years, working in different positions such as technical team leader, project manager, and software developer.  He is currently a software engineer with an emphasis on developing custom applications under Microsoft Windows. When not working with Windows or writing Tips, Barry is an amateur writer. His first non-fiction book is titled "A Chronological Commentary of Revelation." <a href="https://www.tips.net/Authors/A0037_Barry_Dysert.html" rel="author">Learn more about Barry</a>...</p>
+                    <div class="additional-info">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-5 col-sm-5 col-xs-5">
+                                        <h5>MORE FROM BARRY</h5>
+                                    </div>
+                                    <div class="additional-info-line col-lg-9 col-md-7 col-sm-7 col-xs-7"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">							<div class="additional-info-blocks col-md-4 col-xs-6">
+								<p class="author-red">Allowing Remote Desktop</p>
+								<p>Remote Desktop allows you to access other systems and operate them from your own system. If you want to use this&nbsp;...</p>
+								<a href="https://windows.tips.net/T003167_Allowing_Remote_Desktop.html">Discover More</a>
+							</div>							<div class="additional-info-blocks col-md-4 col-xs-6">
+								<p class="author-red">Transferring Pictures from a Camera</p>
+								<p>Transferring pictures from a camera to your computer may be simpler than you think. This tip describes the process.</p>
+								<a href="https://windows.tips.net/T011723_Transferring_Pictures_from_a_Camera.html">Discover More</a>
+							</div>							<div class="additional-info-blocks col-md-4 col-xs-6">
+								<p class="author-red">Deleting a Saved Search</p>
+								<p>Windows Explorer has a good search utility built into it. As you use it, you may wish to delete a previously saved search&nbsp;...</p>
+								<a href="https://windows.tips.net/T012308_Deleting_a_Saved_Search.html">Discover More</a>
+							</div>                	</div>
+
+                </div>
+
+                <div class="ad-horizontal visible-xs">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Windows RU1 -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-7517418523515440"
+                         data-ad-slot="9968389410"
+                         data-ad-format="auto"></ins>
+                    <script>
+                    	(adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                <div class="row">
+                    <div class="additional-info">
+	                    <div class="red-heading-container">
+	                        <h5>More WindowsTips</h5>
+	                    </div>
+                    </div>					<div class="additional-info-blocks col-md-4 col-xs-6">
+						<p class="author-red">Understanding Your Hosts File</p>
+						<p>Your system's Hosts file is an important file that can be used to increase the speed of you network connections, let you&nbsp;...</p>
+						<a href="https://windows.tips.net/T012850_Understanding_Your_Hosts_File.html">Discover More</a>
+					</div>					<div class="additional-info-blocks col-md-4 col-xs-6">
+						<p class="author-red">Figuring Out Your IP Address</p>
+						<p>If you computer communicates over a network or over the Internet, it uses an IP address. This tip explains what an IP&nbsp;...</p>
+						<a href="https://windows.tips.net/T013384_Figuring_Out_Your_IP_Address.html">Discover More</a>
+					</div>					<div class="additional-info-blocks col-md-4 col-xs-6">
+						<p class="author-red">Understanding IP Addresses</p>
+						<p>IP addresses are at the heart of computer networking. They are typically handled automatically, but you may find it&nbsp;...</p>
+						<a href="https://windows.tips.net/T013104_Understanding_IP_Addresses.html">Discover More</a>
+					</div>                </div>
+
+                <!-- Bottom Subscribe Section -->
+                <div class="row">
+					<div class="red-heading-container">
+                        <h5>Subscribe</h5>
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-xs-5">
+                        <div class="panel panel-primary">
+                        	<p style="padding-top: 25px;"><strong>FREE SERVICE:</strong> Get tips like this every week in <em>WindowsTips,</em> a free productivity newsletter. Enter your address and click "Subscribe."</p>
+                                <p class="muted"><u><a href="/ci.html" target="_blank">View most recent newsletter.</a></u></p>
+                        </div>
+                    </div>
+                    <div class="bot-subscribe-right col-md-7 col-sm-7 col-xs-7">
+                        <form method="post" action="https://www.aweber.com/scripts/addlead.pl">
+                            <div class="form-group">
+                                <input type="hidden" name="unit" value="windows_tips" />
+                                <input type="hidden" name="redirect" value="https://windows.tips.net/donesub.html" />
+                                <input type="hidden" name="aweber_adtracking" value="website" />
+                                <input type="hidden" name="aweber_message" value="1" />
+                                <input type="hidden" name="aweber_required" value="from" />
+                                <input type="hidden" name="aweber_forward_vars" value="0" />
+                                <input type="email" class="form-control" placeholder="Enter email" id="emailInput" name="from">
+                            </div>
+                            <button class="btn btn-default btn-block btn-lg" name="submit" value="Subscribe">Subscribe</button>
+                        </form>
+                        <p class="muted"><a href="https://www.tips.net/privacy.html">(Your e-mail address is not shared with anyone, ever.)</a></p>
+                    </div>
+                </div>
+					<div class="row">
+	                    <div id="comment-form-hd" class="red-heading-container">
+	                        <h5>Comments</h5>
+	                    </div>
+					    <form id="comment-form" method="post" enctype="multipart/form-data" onsubmit="return commentFormSubmit(0);" action="">
+					        <input type="hidden" name="type" value="com" />
+					        <input type="hidden" name="num" value="13105" />
+					        <input type="hidden" id="fig_regex" value="\[\{fig\}\]" />
+					        <input type="hidden" id="fig_max" value="3" />
+					        <input type="hidden" id="yday" value="68" />
+					        <input type="hidden" id="disc_body" name="disc_body" value="" />
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="row">
+									<div class="comments-input col-md-12 col-sm-12 col-xs-12" style="padding-top: 20px;">
+										<textarea class="form-control bg-info form-textarea" placeholder="Join the Conversation..." id="comment_body" rows="13" wrap="soft"></textarea>
+									</div>
+								</div>
+								<div class="row">
+									<p style="padding: 0 15px; font-size: 12px; line-height: 1.2">If you would like to add an image to
+									your comment (not an avatar, but an image to help in making the point of your comment),
+									include the characters <b>[{fig}]</b> in your comment text. You’ll be prompted to upload
+									your image when you submit the comment. Maximum image size is 6Mpixels. Images larger than 600px wide or 1000px tall will
+									be reduced. Up to three images may be included in a comment. All images are subject to
+									review. Commenting privileges may be curtailed if inappropriate images are posted.</p>
+								</div>								<div id="comment_fig1" style="display:none;" class="row">
+									<div class="comments-input col-md-6 col-sm-6 col-xs-6">
+										<input class="form-control" placeholder="Figure 1 Caption" id="fig_cap1" name="fig_cap1" type="text" maxlength="70" value="">
+									</div>
+									<div class="comments-input col-md-6 col-sm-6 col-xs-6">
+										<div  class="form-control"><span style="color: #bbbbb1;">Source&nbsp;</span>
+											<input id="fig_file1" name="fig_file1" type="file" accept="image/gif, image/jpeg, image/png" maxlength="120" value="">
+										</div>
+										<p style="font-size: 9px; line-height: 1.3; margin: 0;">(gif, jpeg or png only, 5MB maximum file size)</p>
+									</div>
+								</div>								<div id="comment_fig2" style="display:none;" class="row">
+									<div class="comments-input col-md-6 col-sm-6 col-xs-6">
+										<input class="form-control" placeholder="Figure 2 Caption" id="fig_cap2" name="fig_cap2" type="text" maxlength="70" value="">
+									</div>
+									<div class="comments-input col-md-6 col-sm-6 col-xs-6">
+										<div  class="form-control"><span style="color: #bbbbb1;">Source&nbsp;</span>
+											<input id="fig_file2" name="fig_file2" type="file" accept="image/gif, image/jpeg, image/png" maxlength="120" value="">
+										</div>
+										<p style="font-size: 9px; line-height: 1.3; margin: 0;">(gif, jpeg or png only, 5MB maximum file size)</p>
+									</div>
+								</div>								<div id="comment_fig3" style="display:none;" class="row">
+									<div class="comments-input col-md-6 col-sm-6 col-xs-6">
+										<input class="form-control" placeholder="Figure 3 Caption" id="fig_cap3" name="fig_cap3" type="text" maxlength="70" value="">
+									</div>
+									<div class="comments-input col-md-6 col-sm-6 col-xs-6">
+										<div  class="form-control"><span style="color: #bbbbb1;">Source&nbsp;</span>
+											<input id="fig_file3" name="fig_file3" type="file" accept="image/gif, image/jpeg, image/png" maxlength="120" value="">
+										</div>
+										<p style="font-size: 9px; line-height: 1.3; margin: 0;">(gif, jpeg or png only, 5MB maximum file size)</p>
+									</div>
+								</div>								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-6">
+										<input class="form-control" placeholder="Name" id="comment_name" name="disc_name" type="text" maxlength="40" value="">
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-6">
+										<input class="form-control" placeholder="Email" id="comment_email" name="disc_email" type="email" maxlength="70" value="">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 col-sm-6 col-xs-6">										<div class="checkbox">
+										    <label>
+										      <input id="email_me" name="email_me" value="option1" type="checkbox" >
+										      <p>Notify me about new comments ONLY FOR THIS TIP</p>
+										    </label>
+										</div>
+										<div class="checkbox">
+										    <label>
+										      <input id="email_site" name="email_site" value="option2" type="checkbox" >
+										      <p>Notify me about new comments ANYWHERE ON THIS SITE</p>
+										    </label>
+										</div>
+										<div class="checkbox">
+										    <label>
+										      <input name="dont_show_email" value="option3" type="checkbox"  checked="checked">
+										      <p>Hide my email address</p>
+										    </label>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="row captcha-check">
+											<div class="col-md-6 col-sm-6 col-xs-6">
+												<p class="pull-left"><span id="comment-captcha">What is six minus 6?</span></p>
+											</div>
+											<div class="col-md-6 col-sm-6 col-xs-6">
+												<input class="form-control" placeholder="" id="captcha" name="captcha" type="text" maxlength="10" value="">
+											</div>
+										</div>
+										<div id="comment-error" class="row"></div>
+										<div class="row submit-button">
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												<input type="submit" class="btn btn-default btn-block btn-lg" name="submit" value="Submit Comment">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- Submitted Comments Section -->
+					<div id="submitted-comments" class="comments-text-container col-md-12 col-sm-12 col-xs-12">					<!-- Submitted Comments Section -->
+					<div id="submitted-comments" class="comments-text-container col-md-12 col-sm-12 col-xs-12">
+						<div class="row">							<div class="col-md-3 col-sm-3 col-xs-3">
+								<p class="commenter-date">2018-10-09 01:33:48</p>
+								<p class="commenter-name">Barry</p>
+							</div>
+							<div class="col-md-9 col-sm-9 col-xs-9">
+								<div class="row commenter-separator">
+									<div class="col-md-1 col-sm-1 col-xs-1">
+									<span class="glyphicon glyphicon-comment"></span>
+									</div>
+									<div class="col-md-11 col-sm-11 col-xs-11">
+										<p class="commenter-comment">Thanks for the kind words, Peter. As you probably know, one big way that hackers are able to penetrate a system is through unused open ports. So as a general practice, it&#039;s a good idea to close ports that aren&#039;t being used. It&#039;s a safely precaution.</p>
+									</div>
+								</div>
+							</div>
+							<hr class="comment-hr">							<div class="col-md-3 col-sm-3 col-xs-3">
+								<p class="commenter-date">2018-10-09 01:28:44</p>
+								<p class="commenter-name">Peter J Moran</p>
+							</div>
+							<div class="col-md-9 col-sm-9 col-xs-9">
+								<div class="row commenter-separator">
+									<div class="col-md-1 col-sm-1 col-xs-1">
+									<span class="glyphicon glyphicon-comment"></span>
+									</div>
+									<div class="col-md-11 col-sm-11 col-xs-11">
+										<p class="commenter-comment">Hi Barry,<br /><br />As per your usual quality, a most detailed tip.<br /><br />Could you please give some indication as to why one of us mere mortals might want or need to follow your detailed instructions. <br /><br />Does the PC need to indicate errors on the port, or might it be that one is trying to stop some sort of intrusion into the PC?<br /><br />It seems to me a bit like someone giving me a special spanner, showing me how it works, but not telling where or when I need to use it.<br /><br />Many thanks for your valuable weekly input. <br /><br /></p>
+									</div>
+								</div>
+							</div>
+							<hr class="comment-hr">						</div>
+					</div></div>
+            </div>
+            <!-- Right Sidebar on Desktop -->
+            <div class="right-column col-md-3 col-sm-3 col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="red-heading-container">
+                    	<h5>Newest Tips</h5>
+                    </div>
+                    <div class="panel-body">
+      <div id="ticker-container" onmouseover="sspeed=0;" onmouseout="sspeed=resumesspeed;">
+        <div id="ticker"></div>
+      </div>
+                    </div>
+                </div>                <!-- Subscribe Block -->
+                <div class="panel panel-primary">
+                    <div class="red-heading-container">
+                        <h5>Subscribe</h5>
+                    </div>
+                    <div class="panel-body">
+                        <p><strong>FREE SERVICE:</strong> Get tips like this every week in <em>WindowsTips,</em> a free productivity newsletter. Enter your address and click "Subscribe."</p>
+                        <form method="post" action="https://www.aweber.com/scripts/addlead.pl">
+                            <div class="form-group">
+                                <input type="hidden" name="unit" value="windows_tips" />
+                                <input type="hidden" name="redirect" value="https://windows.tips.net/donesub.html" />
+                                <input type="hidden" name="aweber_adtracking" value="website" />
+                                <input type="hidden" name="aweber_message" value="1" />
+                                <input type="hidden" name="aweber_required" value="from" />
+                                <input type="hidden" name="aweber_forward_vars" value="0" />
+                                <input type="email" class="form-control" placeholder="Enter email" id="emailInput" name="from">
+                            </div>
+                            <button class="btn btn-default btn-block btn-lg" name="submit" value="Subscribe">Subscribe</button>
+                        </form>
+                        <p class="muted"><a href="https://www.tips.net/privacy.html">(Your e-mail address is not shared with anyone, ever.)</a></p>
+                        <p class="muted">
+                            <u><a href="/ci.html" target="_blank">View the most recent newsletter.</a></u>
+                        </p>
+                    </div>
+                </div>                <!-- Links and Sharing Block -->
+                <div class="panel panel-primary">
+                    <div class="red-heading-container">
+                        <h5>Links and Sharing</h5>
+                    </div>
+                    <div class="panel-body">
+ 	                   <ul class="list-group">
+
+	                        <li class="list-group-item">
+	                            <a href="/contact.html" target="_blank">Questions or Comments</a>
+	                        </li>
+                        <li class="list-group-item">
+                            <a href="https://brandingpower.com" target="_blank">Great Branding Ideas</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <a href="http://www.formville.com" target="_blank">Free Business Forms</a>
+                        </li>
+
+	                        <li class="list-group-item">
+	                            <a href="http://calendarcorner.net" target="_blank">Free Calendars</a>
+	                        </li>
+
+							<li class="list-group-item">
+			                    <!-- ADDTHIS BUTTON BEGIN -->
+								<!-- Go to www.addthis.com/dashboard to customize your tools -->
+								<div class="addthis_inline_share_toolbox" style="margin: 0 -20px;"></div>
+			                    <!-- ADDTHIS BUTTON END -->
+	                        </li>
+	                    </ul>
+                	</div>
+                </div>                <!-- Sidebar ads -->
+                <div class="ad-wide-skyscraper">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Windows AU3 -->
+                    <ins class="adsbygoogle"
+                        style="display:inline-block;width:160px;height:600px"
+                        data-ad-client="ca-pub-7517418523515440"
+                        data-ad-slot="6833389415"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>                <div class="ad-sm-text">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Windows LU2 -->
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:160px;height:90px"
+                         data-ad-client="ca-pub-7517418523515440"
+                         data-ad-slot="4519051411"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER -->
+    <div class="bottom-footer container-fluid exp-teasers">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6 exp-teaser">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="exp-teaser-content">
+                        <h5 class="primary-red">OUR COMPANY</h5>
+                        <hr class="primary-red exp-footer-hr">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="http://www.sharonparq.com" target="_blank">Sharon Parq Associates, Inc.</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="https://www.tips.net/about.html" target="_blank">About Tips.Net</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="/contact.html" target="_blank">Contact Us</a>
+                            </li>
+                            <li class="list-group-item">
+                                <p><!-- Left intentionally blank --></p>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="https://advertise.tips.net" target="_blank">Advertise with Us</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="https://www.tips.net/privacy.html" target="_blank">Our Privacy Policy</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="exp-teaser-content">
+                        <div class="hidden-footer-container visible-xs"></div>
+                        <h5 class="primary-red">OUR PRODUCTS</h5>
+                        <hr class="primary-red exp-footer-hr">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="https://store.tips.net/S893_E-books.html" target="_blank">Helpful E-books</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="https://store.tips.net/S887_Newsletter_Archives.html" target="_blank">Newsletter Archives</a>
+                            </li>
+                            <li class="list-group-item">
+                                <p><!-- Left intentionally blank --></p>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="https://store.tips.net/S900_Excel_Products.html" target="_blank">Excel Products</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="https://store.tips.net/C0931_Windows_Products.html" target="_blank">Windows Products</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="https://store.tips.net/S901_Word_Products.html" target="_blank">Word Products</a>
+                            </li>
+                        </ul>
+                        <h5 class="primary-red">OUR AUTHORS</h5>
+                        <hr class="primary-red exp-footer-hr">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="https://www.tips.net/Authors/authors.html" target="_blank">Author Index</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="https://www.tips.net/writing.html" target="_blank">Write for Tips.Net</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 exp-teaser">
+                <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 exp-teaser-content">
+                            <h5 class="primary-red">OUR SITES</h5>
+                            <hr class="primary-red exp-footer-hr">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a href="https://www.tips.net/">Tips.Net</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://beauty.tips.net/">Beauty and Style</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://car.tips.net/">Cars</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://cleaning.tips.net/">Cleaning</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://cooking.tips.net/">Cooking</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://drive.tips.net/">Drive Tips (Google Drive)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://excel.tips.net/">ExcelTips (Excel 97&ndash;2003)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://excelribbon.tips.net/">ExcelTips (Excel 2007&ndash;2019; 365)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://gardening.tips.net/">Gardening</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 exp-teaser-content">
+                            <div class="hidden-footer-container visible-xs"></div>
+                            <h5 class="primary-red">&nbsp;</h5>
+                            <hr class="primary-red exp-footer-hr hidden-xs">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a href="https://health.tips.net/">Health</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://home.tips.net/">Home Improvement</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://money.tips.net/">Money and Finances</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://organizing.tips.net/">Organizing</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://pest.tips.net/">Pests and Bugs</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://pet.tips.net/">Pets and Animals</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://windows.tips.net/">WindowsTips (Microsoft Windows)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://word.tips.net/">WordTips (Word 97&ndash;2003)</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://wordribbon.tips.net/">WordTips (Word 2007&ndash;2019; 365)</a>
+                                </li>
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tips.Net Copyright Info -->
+    <div class="container-fluid tips-copyright">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <p>Copyright &copy; 2019 <a href="http://www.sharonparq.com" target="_blank">Sharon Parq Associates, Inc.</a></p>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    var popWidth = 400;
+    var popHeight = 420;
+    var alw_display_secs = 40;
+    var alw_cookie_name = 'tnpop_15';
+    var myTitle = "FREE WINDOWS TIPS";
+    var myForm = '<form method="post" action="https://www.aweber.com/scripts/addlead.pl" target="_new"><input type="hidden" name="unit" value="windows_tips" /><input type="hidden" name="redirect" value="https://windows.tips.net/donesub.html" /><input type="hidden" name="aweber_adtracking" value="lightbox" /><input type="hidden" name="aweber_message" value="1" /><input type="hidden" name="aweber_required" value="from" /><input type="hidden" name="aweber_forward_vars" value="0" /><table><tr><td colspan="2"><div><div align="center"><font size="5" color="#0000cc" face="Arial"><strong>FREE WINDOWS TIPS!</strong></font>&nbsp;</div><br /><div align="left"><img alt="" src="https://images.tips.net/S00/allen.jpg" align="right" />Hi, I\'m Allen Wyatt, the publisher of Tips.Net. Thanks for visiting our <i>WindowsTips</i> site.<br /><br />I publish a free weekly newsletter that I\'d like you to receive. <i>WindowsTips</i> is published every Monday morning to highlight different aspects of working with Windows.<br /><br />If you don\'t already receive the <i>WindowsTips</i> newsletter, provide your e-mail address and I\'ll handle the rest.</div></div></td></tr><tr><td>&nbsp;&nbsp;&nbsp;Your address:</td><td><input style="font-size:80%;" type="text" name="from" value="" size="20" maxlength="75" /></td></tr><tr><td colspan="2"><div align="left">Don\'t worry; your e-mail won\'t end up on some spam list. We use it only to send you notices from Windows.Tips.Net, and we won\'t share it with anyone else.(Feel free to review our <a href="https://www.tips.net/privacy.html" target="_blank">full privacy policy</a>, if desired.)<br /><br /><font size="2">If you don\'t want to take advantage of this free offer, that\'s fine. Click the "Close" link and, if cookies are enabled on your system, I won\'t ask you again for about six months.</font></div></td></tr><tr><td align="center" colspan="2"><input style="font-size:85%;" type="submit" name="submit" value="Subscribe for Free!" /></td></tr></table></form>';
+</script><script type="text/javascript" src="https://js.tips.net/lightboxform.js"></script>
+    <script type="text/javascript" src="https://analytics.aweber.com/js/awt_analytics.js?id=7M4X"></script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=awyatt"></script>
+</body>
+</html>
